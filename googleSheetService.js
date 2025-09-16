@@ -38,12 +38,12 @@ const createSheetHeaders = async (spreadsheetId) => {
   // });
   // createSheetHeaders
 const headers = [
-  ["Full Name", "Phone Number", "Total Loan Amount", "Message", "Submitted At"],
+  ["Full Name", "Phone Number", "Total Loan Amount", "Preferred Language", "Call Time", "Submitted At"]
 ];
 
 await sheets.spreadsheets.values.update({
   spreadsheetId,
-  range: "Sheet1!A1:E1",
+  range: "Sheet1!A1:F1",
   valueInputOption: "RAW",
   requestBody: { values: headers },
 });
@@ -59,7 +59,7 @@ const writeSheet = async (spreadsheetId, values) => {
   
   const response = await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: 'Sheet1!A:E', // Range for 5 columns (Full Name, Phone, Loan Amount, Message, Submitted At)
+    range: 'Sheet1!A:F', // Range for 5 columns (Full Name, Phone, Loan Amount, Message, Submitted At)
     valueInputOption: 'RAW',
     requestBody: {
       values

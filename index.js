@@ -82,7 +82,8 @@ app.get('/create-headers', async (req, res) => {
 app.post('/submit-form', async (req, res) => {
   try {
     //const { name, email, phone, message, consultationType, date, mode, consultant, duration } = req.body;
-    const { fullName, phone, loanAmount, message } = req.body || {};
+    // const { fullName, phone, loanAmount, message } = req.body || {};
+    const { fullName, phone, loanAmount, preferredLanguage, callTime } = req.body || {};
 
     // Validate required fields (common to all forms: Name and Phone)
     // if (!name || !phone) {
@@ -111,12 +112,20 @@ app.post('/submit-form', async (req, res) => {
     // await writeSheet(SPREADSHEET_ID, values);
     const submittedAt = new Date().toISOString();
 
+    // const values = [[
+    //   String(fullName).trim(),   // A: Full Name
+    //   String(phone).trim(),      // B: Phone Number
+    //   String(loanAmount).trim(), // C: Total Loan Amount
+    //   message ? String(message).trim() : "", // D: Message
+    //   submittedAt                // E: Submitted At
+    // ]];
     const values = [[
-      String(fullName).trim(),   // A: Full Name
-      String(phone).trim(),      // B: Phone Number
-      String(loanAmount).trim(), // C: Total Loan Amount
-      message ? String(message).trim() : "", // D: Message
-      submittedAt                // E: Submitted At
+      String(fullName).trim(),                      // A
+      String(phone).trim(),                         // B
+      String(loanAmount).trim(),                    // C
+      preferredLanguage ? String(preferredLanguage).trim() : "", // D
+      callTime ? String(callTime).trim() : "",      // E
+      submittedAt                                   // F
     ]];
 
     await writeSheet(SPREADSHEET_ID, values);
