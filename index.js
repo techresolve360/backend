@@ -19,7 +19,7 @@ app.get('/health', (req, res) => {
     status: 'OK',
     message: 'Tech Form Backend is running',
     timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
+    uptime: process.uptime(), 
     port: 5004,
     endpoints: {
       'GET /health': 'Health check',
@@ -83,7 +83,9 @@ app.post('/submit-form', async (req, res) => {
   try {
     //const { name, email, phone, message, consultationType, date, mode, consultant, duration } = req.body;
     // const { fullName, phone, loanAmount, message } = req.body || {};
-    const { fullName, phone, loanAmount, preferredLanguage, callTime } = req.body || {};
+    //const { fullName, phone, loanAmount, preferredLanguage, callTime } = req.body || {};
+    const { fullName, phone, loanAmount, city, otherCity } = req.body || {};
+
 
     // Validate required fields (common to all forms: Name and Phone)
     // if (!name || !phone) {
@@ -119,12 +121,21 @@ app.post('/submit-form', async (req, res) => {
     //   message ? String(message).trim() : "", // D: Message
     //   submittedAt                // E: Submitted At
     // ]];
+    // const values = [[
+    //   String(fullName).trim(),                      // A
+    //   String(phone).trim(),                         // B
+    //   String(loanAmount).trim(),                    // C
+    //   preferredLanguage ? String(preferredLanguage).trim() : "", // D
+    //   callTime ? String(callTime).trim() : "",      // E
+    //   submittedAt                                   // F
+    // ]];
+
     const values = [[
       String(fullName).trim(),                      // A
       String(phone).trim(),                         // B
       String(loanAmount).trim(),                    // C
-      preferredLanguage ? String(preferredLanguage).trim() : "", // D
-      callTime ? String(callTime).trim() : "",      // E
+      String(city).trim(),
+      otherCity ? String(otherCity).trim() : "",  // E
       submittedAt                                   // F
     ]];
 

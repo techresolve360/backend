@@ -37,8 +37,11 @@ const createSheetHeaders = async (spreadsheetId) => {
   //   }
   // });
   // createSheetHeaders
+// const headers = [
+//   ["Full Name", "Phone Number", "Total Loan Amount", "Preferred Language", "Call Time", "Submitted At"]
+// ];
 const headers = [
-  ["Full Name", "Phone Number", "Total Loan Amount", "Preferred Language", "Call Time", "Submitted At"]
+  ["Full Name", "Phone Number", "Total Loan Amount", "City","Other City", "Submitted At"]
 ];
 
 await sheets.spreadsheets.values.update({
