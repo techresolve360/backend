@@ -112,7 +112,9 @@ app.post('/submit-form', async (req, res) => {
     // ]];
 
     // await writeSheet(SPREADSHEET_ID, values);
-    const submittedAt = new Date().toISOString();
+    // const submittedAt = new Date().toISOString();
+    const submittedAt = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
 
     // const values = [[
     //   String(fullName).trim(),   // A: Full Name
