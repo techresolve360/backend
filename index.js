@@ -142,9 +142,38 @@ app.post('/submit-form', async (req, res) => {
     ]];
 
     await writeSheet(SPREADSHEET_ID, values);
+    const axios = require('axios');
+    const interaktPayload = {
+      phoneNumber: String(phone).trim(),
+      countryCode: "+91",
+      traits: {
+        name: String(fullName).trim(),
+        "Total Outstanding Loan": String(loanAmount).trim(),
+        City: String(city).trim(),
+        "Other City": otherCity ? String(otherCity).trim() : "",
+        SubmittedAt: submittedAt
+      }
+    };
+
+    const interaktResponse = await axios.post(
+      "https://api.interakt.ai/v1/public/track/users/",
+      interaktPayload,
+      {
+        headers: {
+          Authorization: "Basic V0p5M2ZiNndfczFoMGZXVkQxWDI3R1RUUGNWMXMyYVFjdHhlN1lteWhjYzo=",
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    console.log("✅ Interakt response:", interaktResponse.data);
 
 
-    res.json({ message: 'Data written to sheet' });
+    // res.json({ message: 'Data written to sheet' });
+    res.json({
+      message: "Data sent successfully to Google Sheet & Interakt",
+      interaktResponse: interaktResponse.data
+    });
   } catch (error) {
     console.error('Error writing to sheet:', error);
     res.status(500).json({ error: 'Failed to write data to sheet' });
